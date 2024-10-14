@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Lyrics{% endblock %}
+
+{% block content %}
+    <h1>Edit Lyrics for {{ song_title }}</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        <textarea name="lyrics" rows="20" cols="80">{{ lyrics_data|join:"\n" }}</textarea><br>
+        <button type="submit">Save</button>
+    </form>
+    
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+{% endblock %}

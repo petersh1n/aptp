@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Sessions{% endblock %}
+
+{% block content %}
+    <h1>Session List</h1>
+    <a href="{% url 'session_new' %}">Create New Session</a>
+    <ul>
+        {% for session in sessions %}
+            <li>
+                <a href="{% url 'session_detail' pk=session.pk %}">{{ session.sermon_title }}</a>
+                - {{ session.date }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

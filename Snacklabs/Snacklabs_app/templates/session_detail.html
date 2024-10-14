@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ sermon_title }}{% endblock %}
+
+{% block content %}
+    <h1>{{ sermon_title }}</h1>
+    <p><strong>date:</strong> {{ date }}</p>
+    <p><strong>sermon_bible:</strong> {{ sermon_bible }}</p>
+    <p><strong>preacher:</strong> {{ preacher }}</p>
+    <p><strong>Offering:</strong> {{ offering }}</p>
+    <p><strong>aftersermon:</strong> {{ aftersermon }}</p>
+
+    <h2>title_kr</h2>
+    <ul>
+        {% for title in title_kr %}
+            <li>{{ title }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>title_en</h2>
+    <ul>
+        {% for title in title_en %}
+            <li>{{ title }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>sequence_list</h3>
+    <ul>
+        {% for sequence in sequence_list %}
+            <li>{{ sequence }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>lyrics_list</h3>
+    <ul>
+        {% for lyric in lyrics_list %}
+            <li>{{ lyric }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'session_list' %}">Back to Sessions</a>
+    <script>
+        const sessionData = JSON.parse('{{ json_result|escapejs }}');
+        console.log(sessionData);  // 이제 JavaScript에서 사용할 수 있어
+    </script>
+{% endblock %}
+
