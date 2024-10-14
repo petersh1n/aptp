@@ -1,6 +1,6 @@
-from django.views import View
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Session  # Session 모델이 정의되어 있다고 가정합니다.
+from django.http import HttpResponse
+from .models import Session, Lyrics
 from .forms import SessionForm
 from .forms import LyricsForm
 from .lyrics.get_lyrics import getLyrics
@@ -33,61 +33,60 @@ def session_detail(request, pk):
     return render(request, 'session_detail.html', {'session': session})
 
 
-class LyricsView(View):
-    def get(self, request):
-        form = LyricsForm()
-        return render(request, 'lyrics_search.html', {'form': form})
-
-    def post(self, request):
+def lyrics_search(request):
+    if request.method == 'POST':
         form = LyricsForm(request.POST)
         if form.is_valid():
             song_title = form.cleaned_data['song_title']
             artist_name = form.cleaned_data['artist_name']
 
+            # getLyrics 클래스의 가사 검색 기능 호출
             lyrics_finder = getLyrics()
             lyrics_finder.get_lyrics(song_title, artist_name)
 
+            # 검색된 가사 데이터를 파일에서 읽어오기 (json 파일)
             json_folder = str(lyrics_finder.pth / "lyrics/json")
-            json_file_path = self.find_json_file(json_folder, song_title)
+            json_file_path = None
 
-            lyrics = self.load_lyrics(json_file_path) if json_file_path else "Lyrics not found or JSON conversion failed."
+            # 디렉토리 내 모든 JSON 파일을 확인하여 일치하는 파일 찾기
+            for filename in os.listdir(json_folder):
+                if filename.replace(" ", "") == song_title.replace(" ", "") + ".json":  # 띄어쓰기 제거 후 비교
+                    json_file_path = os.path.join(json_folder, filename)  # 전체 경로 생성
+                    break
+
+            if json_file_path and os.path.exists(json_file_path):
+                with open(json_file_path, 'r', encoding='utf-8') as f:
+                    lyrics_data = json.load(f)
+            else:
+                lyrics_data = {}
+
             return render(request, 'lyrics_search.html', {
                 'form': form,
                 'song_title': song_title,
                 'artist_name': artist_name,
-                'lyrics': lyrics
+                'lyrics_data': lyrics_data
             })
-        return render(request, 'lyrics_search.html', {'form': form})
+    else:
+        form = LyricsForm()
 
-    def find_json_file(self, json_folder, song_title):
-        for filename in os.listdir(json_folder):
-            if filename.replace(" ", "") == song_title.replace(" ", "") + ".json":
-                return os.path.join(json_folder, filename)
-        return None
+    return render(request, 'lyrics_search.html', {'form': form})
 
-    def load_lyrics(self, json_file_path):
-        if json_file_path and os.path.exists(json_file_path):
-            with open(json_file_path, 'r', encoding='utf-8') as f:
-                return json.load(f)
-        return None
 
-    def lyrics_edit(self, request, song_title):
+def lyrics_save(request, song_title):
+    if request.method == 'POST':
+        lyrics_data = request.POST.get('lyrics_data', '')
+        # JSON 데이터로 변환
+        lyrics_dict = {}
+        for line in lyrics_data.splitlines():
+            if ':' in line:
+                key, value = line.split(':', 1)
+                lyrics_dict[key.strip()] = value.strip()
+
         lyrics_finder = getLyrics()
         json_file_path = lyrics_finder.pth / f"lyrics/json/{song_title}.json"
 
-        if json_file_path.exists():
-            with open(json_file_path, 'r', encoding='utf-8') as f:
-                lyrics_data = json.load(f)
-
-            if request.method == 'POST':
-                modified_lyrics = request.POST.get('lyrics')
-                self.save_lyrics(json_file_path, modified_lyrics)
-                return redirect('lyrics_search')
-
-            return render(request, 'lyrics_edit.html', {'lyrics_data': lyrics_data, 'song_title': song_title})
-
-        return render(request, 'lyrics_edit.html', {'error': "Lyrics not found."})
-
-    def save_lyrics(self, json_file_path, modified_lyrics):
         with open(json_file_path, 'w', encoding='utf-8') as f:
-            json.dump(json.loads(modified_lyrics), f, ensure_ascii=False)
+            json.dump(lyrics_dict, f, ensure_ascii=False, indent=4)
+
+        return redirect('lyrics_search')  # 수정 완료 후 검색 페이지로 리다이렉트
+    return HttpResponse("Invalid request method.")

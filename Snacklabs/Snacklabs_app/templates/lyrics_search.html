@@ -1,19 +1,34 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2>Lyrics Search</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Search</button>
-    </form>
-</div>
-
-{% if song_title and artist_name %}
     <div class="container mt-4">
-        <h3>Results for "{{ song_title }}" by "{{ artist_name }}"</h3>
-        <pre>{{ lyrics }}</pre>
+        <h2>Lyrics Search</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+
+        {% if lyrics_data %}
+            <h3>Results for "{{ song_title }}" by "{{ artist_name }}"</h3>
+            <!-- Save Changes Form -->
+            <form method="post" action="{% url 'lyrics_save' song_title=song_title %}">
+                {% csrf_token %}
+                <textarea name="lyrics_data" rows="15" cols="80">
+                    {% for key, value in lyrics_data.items %}
+{{ key }}
+{{ value }}
+                    {% endfor %}
+                </textarea>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+
+        {% elif lyrics %}
+            <p>{{ lyrics }}</p>
+        
+        {% else %}
+            <p>No lyrics found.</p>
+        
+        {% endif %}
     </div>
-{% endif %}
 {% endblock %}

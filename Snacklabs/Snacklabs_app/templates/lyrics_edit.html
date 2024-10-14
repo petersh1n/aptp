@@ -1,17 +1,20 @@
 {% extends 'base.html' %}
 
-{% block title %}Edit Lyrics{% endblock %}
+{% block title %}Lyrics Edit{% endblock %}
 
 {% block content %}
-    <h1>Edit Lyrics for {{ song_title }}</h1>
-    
-    <form method="post">
+    <h1>Lyrics Edit for "{{ song_title }}"</h1>
+    <form method="POST" action="{% url 'lyrics_save' song_title=song_title %}">
         {% csrf_token %}
-        <textarea name="lyrics" rows="20" cols="80">{{ lyrics_data|join:"\n" }}</textarea><br>
-        <button type="submit">Save</button>
+        <textarea name="lyrics_data" rows="20" cols="80">{{ lyrics_data|join:",\n" }}</textarea>
+        <br>
+        <button type="submit">Save Lyrics</button>
     </form>
+
+    <a href="{% url 'lyrics_search' %}">Back to Search</a>
     
     {% if error %}
         <p style="color: red;">{{ error }}</p>
     {% endif %}
 {% endblock %}
+

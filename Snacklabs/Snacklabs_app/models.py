@@ -22,3 +22,11 @@ class Session(models.Model):
     
     def to_json(self):
         return json.dumps(self, cls=DjangoJSONEncoder)
+    
+class Lyrics(models.Model):
+    title = models.CharField(max_length=255)
+    part = models.CharField(max_length=50)
+    content = models.TextField()
+
+    def __str__(self):
+        return f"{self.title} - {self.part}"
