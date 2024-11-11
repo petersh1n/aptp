@@ -1,0 +1,101 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f8f9fa;
+}
+
+h1, h2, h3 {
+    color: #343a40;
+}
+
+/* 기본 헤더 스타일 */
+.head {
+    flex: 0 0 auto;
+    height: 280px; /* 헤드 영역의 높이를 설정 */
+    background-color: #f8f9fa;
+    padding-top: 80px;
+    border-bottom: 1px solid #ddd;
+    text-align: center; /* 텍스트를 가운데 정렬 */
+}
+
+.head h1 {
+    font-size: 2rem;
+    margin: 0;
+    color: #343a40;
+}
+.head .subtitle {
+    margin-top: 5px;
+    color: #6c757d;
+}
+
+/* 오른쪽 네비게이션 바 스타일 */
+#right_nav {
+    position: absolute; /* 네비게이션 바 위치를 상단 오른쪽으로 고정 */
+    top: 0;
+    right: 20px;
+    padding: 10px; /* 네비게이션 바 내부 여백 */
+}
+
+#right_nav .navbar-nav {
+    display: flex; /* 링크들을 가로로 배치 */
+    margin-left: auto; /* 오른쪽 정렬 */
+}
+
+#right_nav a {
+    color: #808080; /* 기본 링크 색상: 회색 */
+    font-size: 15px; /* 글자 크기 */
+    text-decoration: none; /* 밑줄 제거 */
+    margin: 0 5px; /* 링크 사이의 간격 */
+}
+
+#right_nav a:hover {
+    color: #000000; /* 마우스를 올렸을 때 링크 색상: 검정색 */
+    text-decoration: none; /* 마우스를 올려도 밑줄 제거 유지 */
+}
+
+/* 메인 메뉴 스타일 */
+#main_menu .wrapper {
+    background: #333333;
+    margin: 0;
+    padding: 10px;
+}
+.sub_nav {
+    display: flex; /* 링크들을 가로로 배치 */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.sub_nav li {
+    margin: 15px;
+}
+.sub_nav a.courselink {
+    display: flex;
+    padding: 10px;
+    background: #ffffff; /* 링크의 기본 배경색 설정 */
+    border-radius: 4px;
+    color: black;
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sub_nav .selected a {
+    background: #007bff; /* 선택된 섹션의 배경색 */
+    color: #ffffff; /* 선택된 섹션의 텍스트 색상 */
+}
+
+.sub_nav a.courselink:hover {
+    color: #4444;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);    
+}
+
+.mv_section {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: #007bff;
+    border-radius: 50%;
+    margin-left: 5px;
+}
+

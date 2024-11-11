@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Step {{step}} | Get Lyrics{% endblock %}
+
+{% block content %}
+    <h2>Get Lyrics - Songs have been selected ({{step}}/{{total_steps}})</h2>
+    <div id="addlyrics" class="add_lyrics">
+        <form method="POST" action="{% url 'get_lyrics_step' step=step %}?total_steps={{ total_steps }}">
+            {% csrf_token %}
+            <label for="song_title">Song Title:</label>
+            <input type="text" id="song_title" name="song_title" placeholder="Enter the song title" required><br><br>
+
+            <label for="artist_name">Artist Name:</label>
+            <input type="text" id="artist_name" name="artist_name" placeholder="Enter the artist name" required><br><br>
+
+            <button type="submit">Save and Continue</button>
+        </form>
+    </div>
+    
+    <br>
+    {% if success_message %}
+        <p class="response-message" style="color: blue;">{{ success_message }}</p>
+    {% endif %}
+    
+    <!-- 오류 메시지를 표시할 부분 -->
+    {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+
+{% endblock %}

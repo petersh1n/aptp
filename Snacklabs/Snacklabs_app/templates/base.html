@@ -1,85 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Snacklabs{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            background-color: #f8f9fa;
-            margin: 0;
-            padding: 20px;
-        }
-        h1, h2, h3 {
-            color: #343a40;
-        }
-        .container {
-            background: white;
-            border-radius: 5px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        ol {
-            padding-left: 20px;
-        }
-        a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        /* 반응형 디자인을 위한 스타일 */
-        @media (max-width: 600px) {
-            .container {
-                padding: 10px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/head.css' %}">
+    <script src="{% static 'js/head.js' %}" defer></script>
+    <link rel="stylesheet" href="{% static 'css/body.css' %}">
+    <script src="{% static 'js/body.js' %}" defer></script>
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{% url 'index' %}">Snacklabs</a>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'session_list' %}">Sessions</a>
-                </li>
-                
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'lyrics_search' %}">Praise</a>
-                </li>
-            </ul>
+<!--추후에 course에 대한 자세한 클래스를 지정-->
+<body id="course_index">
+    <div class="whole_wrapper">
+        <div class="head">
+            <header>
+                <h1>
+                    <a href="{% url 'index' %}">Snacklabs</a>
+                </h1>
+                <p class="subtitle">
+                        <small>Welcome to the Snacklabs</small>
+                </p>
+                <!-- HTML: 오른쪽 상단 네비게이션 바 -->
+                <nav id="right_nav">
+                    <ul class="navbar-nav">
+                        <li><a href="#">이용자 이름</a> | <a href="#">프로필</a> | <a href="#">설정</a> | <a href="#">로그아웃</a></li>
+                    </ul>
+                </nav>
+            </header>
+            <nav id="main_menu">
+                <div class="wrapper">
+                    <ul class="sub_nav">
+                        <li class="{% if request.resolver_match.url_name == 'session_list' %}selected{% endif %}">
+                            <div class="label public" >
+                                <a class="courselink" href="{% url 'session_list' %}">
+                                    Session
+                                    <span class="mv_section"></span>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="{% if request.resolver_match.url_name == 'get_lyrics_complete' %}selected{% endif %}">
+                            <div class="label public">
+                                <a class="courselink" href="{% url 'get_lyrics_complete' %}">
+                                    Praise
+                                    <span class="mv_section"></span>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </div>
-    </nav>
-
-    <div class="container mt-4">
-        {% block content %}
-        {% endblock %}
+        <div class="body">
+            <div id="breadcrumb">
+                <div class="wrapper">
+                    <span id="breadcrumb_line">
+						Main
+                        <span class="divider">></span>
+                        Category 1
+                        <span class="divider">></span>
+                        Category 2
+                        <span class="divider">></span>
+                        Current page
+                    </span>
+                </div>
+            </div>
+            <div class="wrapper">
+                <div class="row">
+                    <!-- 섹션 영역 -->
+                    <aside>
+                        <nav id="page_list_index" class="sidebar bg-light">
+                            <!--이거 css코드로 바꿔야됌-->
+                            <div class="sidebar-sticky">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'session_list' %}">Sessions</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'get_lyrics_complete' %}">Praise</a>
+                                    </li>
+                                    <!-- 새로운 섹션 제목들이 여기에 추가됩니다 -->
+                                    <div id="sectionsList">
+                                        {% for section in sections %}
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="#">{{ section.title }}</a>
+                                                <a class="delete_section" href="{% url 'delete_section' section.id %}" onclick="return confirm('Are you sure you want to delete this section?');">Delete</a>
+                                            </li>
+                                        {% endfor %}
+                                    </div>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#" id="addSectionButton">+ Add Section</a>
+                                        <!-- 섹션 추가 폼 (숨겨진 상태로 시작) -->
+                                        <div id="addSectionForm" class="ad_section" style="display: none;">
+                                            <form method="post" action="{% url 'save_section' %}">
+                                                {% csrf_token %}
+                                                <div class="form-group">
+                                                    <input type="text" id="section_title" name="section_title" class="form-control" placeholder="New Section Title" required>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary btn-block">Save</button>
+                                            </form>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </aside>
+                    <!-- 작업 영역 -->
+                    <div class="entry_area">
+                        <main class="custom-section mx-auto px-4">
+                            <div class="container mt-4">
+                            {% block content %}
+                            {% endblock %}
+                            </div>
+                        </main>
+                    </div>
+                    <footer class="footer mt-auto py-3 bg-light">
+                        <div class="container">
+                            <span class="text-muted">&copy; 2024 Snacklabs</span>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <script>
-        document.querySelectorAll('h2').forEach(section => {
-            section.addEventListener('click', () => {
-                const content = section.nextElementSibling;
-                if (content.style.display === 'none' || content.style.display === '') {
-                    content.style.display = 'block';
-                    section.classList.add('active');
-                } else {
-                    content.style.display = 'none';
-                    section.classList.remove('active');
-                }
-            });
-        });
-    </script>
-
-    <footer class="footer mt-auto py-3 bg-light">
-        <div class="container">
-            <span class="text-muted">&copy; 2024 Snacklabs</span>
-        </div>
-    </footer>
 </body>
 </html>

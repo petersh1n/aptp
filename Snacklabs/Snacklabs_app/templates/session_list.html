@@ -3,7 +3,7 @@
 {% block title %}Sessions{% endblock %}
 
 {% block content %}
-    <h1>Session List</h1>
+    <h2>Session List</h2>
     <a href="{% url 'session_new' %}">Create New Session</a>
     <ul>
         {% for session in sessions %}

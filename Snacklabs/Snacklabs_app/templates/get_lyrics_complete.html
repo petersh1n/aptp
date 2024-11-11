@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Get Lyrics_Complete{% endblock %}
+
+{% block content %}
+    <h2>Complete</h2>
+    <h3>All songs have been entered!</h3>
+    <p>The songs are now saved.</p>
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">Song Title</th>
+                <th colspan="2">Artist Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for lyric in lyrics_list %}
+                <tr>
+                    <td colspan="2">{{ lyric.song_title }}</td>
+                    <td colspan="2">{{ lyric.artist_name }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="2">No songs saved.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <a href="{% url 'get_lyrics_index' %}">Enter New Song lists</a>
+{% endblock %}

@@ -1,12 +1,19 @@
-from django.urls import path
-from . import views
+from django.urls import path  # type: ignore
+from Snacklabs_app.views import index, save_section, delete_section
+from Snacklabs_app.views import session_list, session_new, session_detail
+from Snacklabs_app.views import get_lyrics_index, get_lyrics_step, get_lyrics_complete
+from django.conf import settings  # type: ignore
+from django.conf.urls.static import static  # type: ignore
+
 
 urlpatterns = [
-    path('', views.index, name='index'),  # 인덱스 뷰를 루트 URL에 매핑
-    path('sessions/', views.session_list, name='session_list'),  # 세션 리스트
-    path('sessions/new/', views.session_new, name='session_new'),  # 새 세션 생성
-    #path('sessions/<int:pk>/edit/', views.session_edit, name='session_edit'),  # 세션 수정
-    path('sessions/<int:pk>/', views.session_detail, name='session_detail'),  # 세션 상세보기
-    path('lyrics_search/', views.lyrics_search, name='lyrics_search'),
-    path('lyrics_save/<str:song_title>/', views.lyrics_save, name='lyrics_save'),
-]
+    path("", index, name="index"),
+    path("save_section/", save_section, name="save_section"),
+    path("delete_section/<int:section_id>/", delete_section, name="delete_section"),
+    path("sessions/", session_list, name="session_list"),
+    path("sessions/new/", session_new, name="session_new"),
+    path("sessions/<int:pk>/", session_detail, name="session_detail"),
+    path("get_lyrics/", get_lyrics_index, name="get_lyrics_index"),
+    path("get_lyrics/step<int:step>/", get_lyrics_step, name="get_lyrics_step"),
+    path("get_lyrics/complete/", get_lyrics_complete, name="get_lyrics_complete"),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

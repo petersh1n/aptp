@@ -1,60 +1,52 @@
 {% extends 'base.html' %}
 
-{% block title %}Sessions{% endblock %}
+{% block title %}Snacklabs{% endblock %}
 
 {% block content %}
-    <div class="container mt-4">
-        <h1>Snacklabs</h1>
-        <p>To simplify the process of making PPT every week, made a PPT template.</p>
-        <p>Named all Slide Master layouts and all sections. You can see some placeholders in each layouts.</p>
+    <h1>Snacklabs</h1>
+    <p>To simplify the process of making PPT every week, made a PPT template.</p>
+    <p>Named all Slide Master layouts and all sections. You can see some placeholders in each layouts.</p>
+        <br>
+    <h2>Purpose</h2>
+    <p>The ultimate goal of this project is to automate the PPT-making process.  
+    Using pptx-python library from Python, we can control PPT with Python code.</p>
+        <br>
+    <h2>Requirements</h2>
+    <h3>Fonts</h3>
+    <p>Chalkduster, SB Aggro, Dreaming Outloud Pro, Footlight MT, Gowun Batang, BM Yeonsung, 210 Soopilmyungjo, Nanum Gothic, Gowun Dodum are required.  
+    Chalkduster, Dreaming Outloud Pro, Footlight MT are default. (MAYBE)</p>
+    <h3>Python Libraries</h3>
+    <p>If you want to write and edit code for the automation process, please install these Python libraries and needless to say, Python also.</p>
+    <p>In this project, we used python-pptx, pathlib, json, time, re, requests, beautifulsoup4(bs4).  
+    You have to install python-pptx, requests, beautifulsoup4(bs4). Otherwise, I bet it is installed when you install Python.  
+    Use "pip3 install -r requirements.txt"</p>
+    <p>Here is a guide that will help using this library. <a href="https://python-pptx.readthedocs.io/en/latest/">pptx-python</a>.</p>
+    <h3>ETC.</h3>
+    <p>A little bit of knowledge w.r.t. Python (if you want to understand and edit the code).  
+    Otherwise, you don't have to give a shit XD ...</p>
+        <br>
+    <h2>How It Works</h2>
+    <h3>What you have to prepare</h3>
+    <p>You may have to prepare:</p>
+    <ol>
+        <li>PPT Template file that the named layouts are prepared in Slidemaster.</li>
+        <li>TXT file that includes PPT sequence.</li>
+        <li>JSON file that includes the information about the session.</li>
+    </ol>
+    <p>But even if you don't do these, it will give you the guidelines.</p>
+    <h3>Process</h3>
+    <p>If you run the code, you can see the instructions. You can just kindly follow them.</p>
+    <ol>
+        <li>It gets the layout sequence information from TXT file.</li>
+        <li>It gets the detailed information of the session from JSON file.</li>
+        <li>Create PPT file from the sequence and the detailed information.</li>
+    </ol>
 
-        <h2>Purpose</h2>
-        <p>The ultimate goal of this project is to automate the PPT-making process.  
-        Using pptx-python library from Python, we can control PPT with Python code.</p>
-
-        <h2>Requirements</h2>
-        
-        <h3>Fonts</h3>
-        <p>Chalkduster, SB Aggro, Dreaming Outloud Pro, Footlight MT, Gowun Batang, BM Yeonsung, 210 Soopilmyungjo, Nanum Gothic, Gowun Dodum are required.  
-        Chalkduster, Dreaming Outloud Pro, Footlight MT are default. (MAYBE)</p>
-
-        <h3>Python Libraries</h3>
-        <p>If you want to write and edit code for the automation process, please install these Python libraries and needless to say, Python also.</p>
-        <p>In this project, we used python-pptx, pathlib, json, time, re, requests, beautifulsoup4(bs4).  
-        You have to install python-pptx, requests, beautifulsoup4(bs4). Otherwise, I bet it is installed when you install Python.  
-        Use "pip3 install -r requirements.txt"</p>
-        <p>Here is a guide that will help using this library. <a href="https://python-pptx.readthedocs.io/en/latest/">pptx-python</a>.</p>
-
-        <h3>ETC.</h3>
-        <p>A little bit of knowledge w.r.t. Python (if you want to understand and edit the code).  
-        Otherwise, you don't have to give a shit XD ...</p>
-
-        <h2>How It Works</h2>
-
-        <h3>What you have to prepare</h3>
-        <p>You may have to prepare:</p>
-        <ol>
-            <li>PPT Template file that the named layouts are prepared in Slidemaster.</li>
-            <li>TXT file that includes PPT sequence.</li>
-            <li>JSON file that includes the information about the session.</li>
-        </ol>
-        <p>But even if you don't do these, it will give you the guidelines.</p>
-
-        <h3>Process</h3>
-        <p>If you run the code, you can see the instructions. You can just kindly follow them.</p>
-        <ol>
-            <li>It gets the layout sequence information from TXT file.</li>
-            <li>It gets the detailed information of the session from JSON file.</li>
-            <li>Create PPT file from the sequence and the detailed information.</li>
-        </ol>
-
-        <h3>Lyrics</h3>
-        <ol>
-            <li>You can make .txt file to use "get_lyrics.py".</li>
-            <li>You have to change 'title' and 'artist_name' from "get_lyrics.py".</li>
-        </ol>
-
-        <h3>dict</h3>
-        <p>You have to organize the dict sequence.</p>
-    </div>
+    <h3>Lyrics</h3>
+    <ol>
+        <li>You can make .txt file to use "get_lyrics.py".</li>
+        <li>You have to change 'title' and 'artist_name' from "get_lyrics.py".</li>
+    </ol>
+    <h3>dict</h3>
+    <p>You have to organize the dict sequence.</p>
 {% endblock %}

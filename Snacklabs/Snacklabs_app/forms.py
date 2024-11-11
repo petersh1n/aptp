@@ -1,5 +1,6 @@
 from django import forms
 from .models import Session
+from .models import Lyrics
 
 class SessionForm(forms.ModelForm):
     class Meta:
@@ -7,6 +8,7 @@ class SessionForm(forms.ModelForm):
         fields = '__all__'
 
 
-class LyricsForm(forms.Form):
-    song_title = forms.CharField(label='Song Title', max_length=100)
-    artist_name = forms.CharField(label='Artist Name', max_length=100, required=False)
+class LyricsForm(forms.ModelForm):
+    class Meta:
+        model = Lyrics
+        fields = ['song_title', 'artist_name', 'lyrics_text']
