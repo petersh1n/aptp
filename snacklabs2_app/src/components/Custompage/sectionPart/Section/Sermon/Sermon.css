@@ -1,0 +1,55 @@
+.sermon-section {
+    padding: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.bible-section {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+
+.bible-section h3 {
+    margin: 0 0 15px 0;
+    font-size: 16px;
+}
+
+.verse-range {
+    display: flex;
+    gap: 15px;
+}
+
+.verse-range .input-group {
+    flex: 1;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: auto;
+}
+
+input[type="file"] {
+    padding: 4px;
+}

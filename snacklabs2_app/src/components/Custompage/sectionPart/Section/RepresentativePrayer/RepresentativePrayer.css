@@ -1,0 +1,26 @@
+/* src/components/Section/ApostlesCreed/ApostlesCreed.css */
+.apostles-creed-section {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.apostles-creed-section h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.apostles-creed-section label {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.apostles-creed-section select {
+    padding: 5px 10px;
+    font-size: 16px;
+    margin: 5px 0 15px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}

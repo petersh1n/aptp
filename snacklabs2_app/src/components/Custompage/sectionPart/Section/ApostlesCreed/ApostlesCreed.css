@@ -1,0 +1,20 @@
+/* src/components/Section/ApostlesCreed/ApostlesCreed.css */
+.apostles-creed-section {
+    padding: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}

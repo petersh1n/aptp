@@ -1,0 +1,9 @@
+/* src/components/IndexMain/IndexMain.css */
+.IndexMain {
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    background-color: #f4f4f4;
+}

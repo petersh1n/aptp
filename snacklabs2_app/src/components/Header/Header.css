@@ -1,0 +1,31 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    color: black;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.header-logo {
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.menu-button,
+.login-button {
+    background-color: gray;
+    color: black;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.menu-button:hover,
+.login-button:hover {
+    background-color: gray;
+    color: black;
+}
