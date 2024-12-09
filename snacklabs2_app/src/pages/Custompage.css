@@ -1,0 +1,32 @@
+.custom-page {
+    display: flex;
+    background-color: #ffde7c;
+    flex-direction: row;
+    height: 107vh;
+    width: 100%;
+}
+
+.left-container {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+
+.left-container h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.left-container .section-zone {
+    padding-inline: 10px;
+    max-height: 50px;
+    max-width: 100%;
+    font-size: 14px;
+}
+
+.section-container {
+    width: 40%;
+    overflow-y: auto;
+}

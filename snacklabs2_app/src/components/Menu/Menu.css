@@ -76,6 +76,12 @@
     border-right: 1px solid #ccc;
 }
 
+.models-list h2 {
+    font-size: 25px;
+    margin-bottom: 15px;
+    padding: 10px;
+}
+
 .menu-item {
     background: none;
     border: none;

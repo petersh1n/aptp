@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header/Header';
-import IndexMain from './components/Indexpage/IndexMain';
+import Homepage from './pages/Homepage';
 import Menu from './components/Menu/Menu';
-import CustomIndex from './components/Custompage/CustomIndex';
+import Custompage from './pages/Custompage';
 
 import './App.css';
 
@@ -51,7 +51,7 @@ function AppContent() {
           path="/"
           element={
             <PageWithMenu>
-              <IndexMain />
+              <Homepage />
             </PageWithMenu>
           }
         />
@@ -59,7 +59,7 @@ function AppContent() {
           path="/custom/:department/:group/:model"
           element={
             <PageWithMenu>
-              <CustomIndex />
+              <Custompage />
             </PageWithMenu>
           }
         />

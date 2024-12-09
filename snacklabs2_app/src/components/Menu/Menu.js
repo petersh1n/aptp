@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import menuData from './menuData'; // 메뉴 데이터 파일
+import menuData from '../../data/menuData'; // 메뉴 데이터 파일
 
 import './Menu.css';
 

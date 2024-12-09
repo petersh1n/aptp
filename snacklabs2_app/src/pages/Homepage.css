@@ -1,0 +1,20 @@
+/* src/components/IndexMain/IndexMain.css */
+.Homepage {
+    padding: 2rem;
+    height: calc(100vh - 56px);
+    min-height: calc(100vh - 56px);
+    display: flex;
+    overflow-y: auto;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffde7c;
+    color: black;
+}
+
+.Homepage .ModelGrid {
+    color: black;
+}
+
+.Homepage .SelectedModel {
+    color: black;
+}
